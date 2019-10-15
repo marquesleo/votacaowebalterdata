@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <form [formGroup]="recursoForm" autocomplete="off" 
+        novalidate (ngSubmit)="updateRecurso(recursoForm.value)">
+    <div class="form-horizontal well">
+ 
+      <div class="form-group">
+        <label for="nome" class="control-label col-md-2">Recurso:</label>
+        <div class="col-md-5">
+         <input type="text" formControlName="nome" id="nome" class="form-control" />
+        </div>
+        <div class="col-md-5">
+          <em *ngIf="validateControl('nome') && hasError('nome', 'required')">Recurso é obrigatória</em>
+          <em *ngIf="validateControl('nome') && hasError('nome', 'maxlength')">Tamanho máximo é de 100 caracteres.</em>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="idFilial" class="control-label col-md-2">Filial: </label>
+          <div class="col-md-5">
+            <select class="form-control" id="id" formControlName="idFilial" [compareWith]="compararFiliais">
+              <option *ngFor="let filial of filiais"  [ngValue]="filial.id">{{filial.sigla}}</option>
+            </select>
+          </div>
+          <div class="col-md-5">
+            <em *ngIf="validateControl('idFilial') && hasError('idFilial', 'required')">Filial é obrigatória</em>
+           
+          </div>
+       </div>
+
+      <br><br>
+      <div class="form-group">
+        <div class="col-md-2">
+              <button type="submit" class="btn btn-info" [disabled]="!recursoForm.valid">Confirmar</button>
+          </div>
+          <div class="col-md-2">
+             <button type="button" class="btn btn-danger" (click)="redirectToRecursoList()">Cancelar</button>
+          </div>
+      </div>
+
+
+    </div>
+   
+
+
+
+  </form>
+
+  <app-success-modal [modalHeaderText]="'Operação realizada com sucesso'" 
+  [modalBodyText]="'Registro incluído'" [okButtonText]="'OK'" 
+  (redirectOnOK)="redirectToRecursoList()"></app-success-modal>
+
+  <app-error-modal [modalHeaderText]="'Falha na Operação'" 
+  [modalBodyText]="errorMessage" [okButtonText]="'OK'"></app-error-modal>
+</div>

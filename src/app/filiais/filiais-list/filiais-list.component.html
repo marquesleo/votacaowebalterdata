@@ -1,0 +1,38 @@
+<div class="row"> 
+    <div class="col-md-offset-10 col-md-2">
+      <a [routerLink]="['/filiais/create']">Incluir</a>
+    </div>
+  </div>
+  <br>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Sigla</th>
+              <th>Filial</th>
+              <th>Alterar</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let filial of filiais">
+              <td>{{filial.sigla}}</td>
+              <td>{{filial.nome}}</td>
+              <td>
+                  <button type="button" id="update" class="btn btn-success" 
+                          (click)="redirectToUpdatePage(filial.id)">Alterar</button>
+              </td>
+              <td>
+                  <button type="button" id="delete" class="btn btn-danger" 
+                  (click)="redirectToDeletePage(filial.id)">Excluir</button>
+              
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,38 @@
+<div class="row"> 
+    <div class="col-md-offset-10 col-md-2">
+        <a type="button" id="incluir" 
+        (click)="novoUsuario(false)">Incluir</a>
+    
+    </div>
+  </div>
+  <br>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Usuário</th>
+              <th>E-mail</th>
+              <th>Filial</th>
+              <th>Alterar</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <td>{{usuario.nome}}</td>
+              <td>{{usuario.email}}</td>
+              <td>{{usuario.siglafilial}}</td> 
+              <td>
+                  <button type="button" id="update" class="btn btn-success" 
+                          (click)="redirectToUpdatePage(usuario.id)">Alterar</button>
+              </td>
+             
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

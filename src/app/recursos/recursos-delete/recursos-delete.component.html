@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10 well">
+      <div class="row">
+
+         <div class="col-md-3">
+          <label for="nome" class="control-label">Recurso:</label>
+         </div>
+
+        <div class="col-md-7">
+          <span name="nome">
+            {{recurso?.nome}}
+          </span>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+          <div class="col-md-2">
+           <button type="submit" class="btn btn-info" (click)="deleteRecurso()">Excluir</button>
+        </div>
+        <div class="col-md-2">
+           <button type="button" class="btn btn-danger" (click)="redirectToRecursoList()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <br>
+  <app-success-modal [modalHeaderText]="'Sucesso no procedimento'" 
+  [modalBodyText]="'Ação realizada com sucesso!'" 
+  [okButtonText]="'OK'"
+  (redirectOnOK)="redirectToRecursoList()"></app-success-modal>
+ 
+ <app-error-modal [modalHeaderText]="'Erro na operação!'" 
+  [modalBodyText]="errorMessage" 
+  [okButtonText]="'OK'"></app-error-modal>
+</div>

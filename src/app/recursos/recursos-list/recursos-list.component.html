@@ -1,0 +1,37 @@
+<div class="row"> 
+  <div class="col-md-offset-10 col-md-2">
+    <a [routerLink]="['/recursos/create']">Incluir</a>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Recurso</th>
+            <th>Alterar</th>
+            <th>Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let recurso of recursos">
+            <td>{{recurso.nome}}</td>
+            
+            <td>
+                <button type="button" id="update" class="btn btn-success" 
+                        (click)="redirectToUpdatePage(recurso.id)">Alterar</button>
+            </td>
+            <td>
+                <button type="button" id="delete" class="btn btn-danger" 
+                (click)="redirectToDeletePage(recurso.id)">Excluir</button>
+            
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

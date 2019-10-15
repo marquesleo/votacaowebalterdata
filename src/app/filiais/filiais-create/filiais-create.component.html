@@ -1,0 +1,58 @@
+
+
+  <div class="container-fluid">
+  
+      <form  [formGroup]="filialForm" autocomplete="off" 
+        novalidate (ngSubmit)="createFilial(filialForm.value)"> 
+  
+        
+      <div class="form-horizontal well">
+  
+          <div class="form-group">
+              <label for="sigla" class="control-label col-md-2">Sigla:</label>
+              <div class="col-md-5">
+                <input type="text"  formControlName="sigla" id="sigla" class="form-control" />
+              </div>
+              <div class="col-md-5">
+                <em *ngIf="validateControl('sigla') && hasError('sigla', 'required')">Sigla é obrigatória</em>
+                <em *ngIf="validateControl('sigla') && hasError('sigla', 'maxlength')">Tamanho máximo é de 2 caracteres.</em>
+              </div>
+           </div> 
+
+
+       <div class="form-group">
+          <label for="nome" class="control-label col-md-2">Nome: </label>
+          <div class="col-md-5">
+            <input type="text"  formControlName="nome" id="nome" class="form-control" />
+          </div>
+          <div class="col-md-5">
+            <em *ngIf="validateControl('nome') && hasError('nome', 'required')">Nome é obrigatório</em>
+            <em *ngIf="validateControl('nome') && hasError('nome', 'maxlength')">Tamanho máximo é de 50 caracteres.</em>
+          </div>
+       </div>
+         
+  
+        <br><br>
+     
+        <div class="form-group">
+           <div class="row">
+              <div class="col-md-2">
+                  <button type="submit" class="btn btn-info" [disabled]="!filialForm.valid">Confirmar</button>
+              </div>
+              <div class="col-md-2">
+                  <button type="button" class="btn btn-danger" (click)="redirectToFiliaisList()">Cancelar</button>
+              </div>
+           </div>
+        </div>
+        
+      </div>
+    </form>
+  
+    <app-success-modal [modalHeaderText]="'Operação realizada com sucesso'" 
+    [modalBodyText]="'Registro incluído'" [okButtonText]="'OK'" 
+    (redirectOnOK)="redirectToFiliaisList()"></app-success-modal>
+  
+    <app-error-modal [modalHeaderText]="'Falha na Operação'" 
+    [modalBodyText]="errorMessage" [okButtonText]="'OK'"></app-error-modal>
+  
+  </div>

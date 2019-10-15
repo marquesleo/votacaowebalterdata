@@ -1,0 +1,17 @@
+    <app-menu></app-menu>
+   
+    <h1>Olá {{currentUser?.nome}}!</h1>
+    <p>Você está logado</p>
+    <router-outlet></router-outlet>
+    <div class="row">
+       
+        <div class="center-block">
+            <a class="nav-item nav-link"  [routerLink]="['/votacao/list']">
+                <img src="../../assets/img/images.png" width="320" height="320"> 
+            </a>
+         </div>
+    </div>
+
+    <p><a [routerLink]="['/login']">Logout</a></p>
+    
+    
