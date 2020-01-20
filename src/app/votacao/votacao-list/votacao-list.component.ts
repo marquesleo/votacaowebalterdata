@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/_models/usuario';
 import { Recurso } from 'src/app/_models/Recurso';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {SelectionModel} from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material';
+import {CdkTableModule} from '@angular/cdk/table';
 
 @Component({
   selector: 'app-votacao-list',
@@ -18,6 +21,11 @@ export class VotacaoListComponent implements OnInit {
   loading = false;
   submitted = false;
   teamForm: FormGroup;
+  public RecursoParaVotacao:RecursoASerVotado[];
+  displayedColumns = ['voto', 'recurso', 'observacao'];
+  
+  dataSource = new MatTableDataSource<RecursoASerVotado>();
+  selection = new SelectionModel<RecursoASerVotado>(false, []);
 
   constructor(private repository:RepositoryService,
     private errorHandler: ErrorHandlerService,
@@ -29,7 +37,20 @@ export class VotacaoListComponent implements OnInit {
       });
      }
 
-  public RecursoParaVotacao:RecursoASerVotado[];
+   isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      return numSelected === numRows;
+    }
+
+      /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+ 
   ngOnInit() {
     this.getAllRecursos();
    
@@ -43,7 +64,8 @@ export class VotacaoListComponent implements OnInit {
    
     this.repository.getData(recursosUrl)
     .subscribe(res => {
-     this.RecursoParaVotacao = res as RecursoASerVotado[] ;
+    // this.RecursoParaVotacao = res as RecursoASerVotado[] ;
+     this.dataSource.data = res as RecursoASerVotado[]
      /*this.RecursoParaVotacao = new Array(votacao.length-1);
      votacao.forEach(obj => {
        obj.selecionado =false;
